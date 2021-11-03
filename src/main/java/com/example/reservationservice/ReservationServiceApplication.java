@@ -7,15 +7,13 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Component;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import java.util.Collection;
-import java.util.List;
 import java.util.stream.Stream;
 
 @SpringBootApplication
@@ -36,11 +34,9 @@ class ReservationRestController {
 		this.reservationRepository = reservationRepository;
 	}
 
-	@RequestMapping(method = RequestMethod.GET, value = "/reservations", produces = MediaType.APPLICATION_JSON_VALUE)
+	@GetMapping(value = "/reservations", produces = MediaType.APPLICATION_JSON_VALUE)
 	public Collection<Reservation> reservations() {
-		List<Reservation> all = this.reservationRepository.findAll();
-
-		return all;
+		return this.reservationRepository.findAll();
 	}
 }
 
